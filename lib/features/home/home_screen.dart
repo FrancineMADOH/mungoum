@@ -47,21 +47,21 @@ class _HomeBody extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-            _Logo(),
-            const SizedBox(height: 40),
-            _TodayLabel(label: l10n.today),
-            const SizedBox(height: 8),
-            _DayName(name: day.name),
-            const SizedBox(height: 16),
-            MarketBadgeWidget(day: day),
-            const SizedBox(height: 24),
-            _GregorianDate(date: formattedDate),
-            const SizedBox(height: 40),
-            _CalendarButton(label: l10n.seeCalendar),
-          ],
+              _Logo(),
+              const SizedBox(height: 40),
+              _TodayLabel(label: l10n.today),
+              const SizedBox(height: 8),
+              _DayName(name: day.name),
+              const SizedBox(height: 16),
+              MarketBadgeWidget(day: day),
+              const SizedBox(height: 24),
+              _GregorianDate(date: formattedDate),
+              const SizedBox(height: 40),
+              _CalendarButton(label: l10n.seeCalendar),
+            ],
+          ),
         ),
       ),
-    ),
     );
   }
 }
@@ -119,10 +119,8 @@ class _GregorianDate extends StatelessWidget {
       date,
       textAlign: TextAlign.center,
       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: Theme.of(context)
-                .colorScheme
-                .onSurface
-                .withValues(alpha: 0.7),
+            color:
+                Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
           ),
     );
   }

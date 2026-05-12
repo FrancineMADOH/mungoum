@@ -71,4 +71,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get pageNotFound => 'Page introuvable';
+
+  @override
+  String get errorOpeningLink => 'Impossible d\'ouvrir le lien';
 }

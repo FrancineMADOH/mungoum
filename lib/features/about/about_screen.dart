@@ -8,15 +8,28 @@ import 'package:mungoum/shared/widgets/app_scaffold.dart';
 // URL donation — chaîne vide = bouton masqué. Remplacer par l'URL réelle avant la release.
 const _donationUrl = 'https://www.paypal.com/donate';
 
-class AboutScreen extends StatelessWidget {
+class AboutScreen extends StatefulWidget {
   const AboutScreen({super.key});
+
+  @override
+  State<AboutScreen> createState() => _AboutScreenState();
+}
+
+class _AboutScreenState extends State<AboutScreen> {
+  late final Future<PackageInfo> _packageInfoFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _packageInfoFuture = PackageInfo.fromPlatform();
+  }
 
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
       currentIndex: 3,
       child: FutureBuilder<PackageInfo>(
-        future: PackageInfo.fromPlatform(),
+        future: _packageInfoFuture,
         builder: (context, snapshot) {
           final version = snapshot.data?.version ?? '';
           return _AboutBody(version: version);
@@ -142,17 +155,25 @@ class _DonationButton extends StatelessWidget {
   final AppLocalizations l10n;
   const _DonationButton({required this.l10n});
 
-  Future<void> _launch() async {
-    final uri = Uri.parse(_donationUrl);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
+  Future<void> _launch(BuildContext context) async {
+    try {
+      final uri = Uri.parse(_donationUrl);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      }
+    } catch (_) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.errorOpeningLink)),
+        );
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton.icon(
-      onPressed: _launch,
+      onPressed: () => _launch(context),
       icon: const Icon(Icons.favorite_outline),
       label: Text(l10n.supportProject),
       style: OutlinedButton.styleFrom(

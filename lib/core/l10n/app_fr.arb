@@ -21,5 +21,6 @@
   "seeCalendar": "Voir le calendrier",
   "developedBy": "Développé par Brightwill LLC",
   "appSubtitle": "Calendrier Nguemba",
-  "pageNotFound": "Page introuvable"
+  "pageNotFound": "Page introuvable",
+  "errorOpeningLink": "Impossible d'ouvrir le lien"
 }

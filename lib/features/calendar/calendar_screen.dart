@@ -113,21 +113,44 @@ class _MonthHeader extends StatelessWidget {
 }
 
 // Ligne des en-têtes de jours de la semaine (Lun → Dim).
-class _WeekDayHeaders extends StatelessWidget {
+// StatefulWidget so that the 7 DateFormat calls are cached and only
+// recomputed when the locale actually changes (not on every rebuild).
+class _WeekDayHeaders extends StatefulWidget {
+  @override
+  State<_WeekDayHeaders> createState() => _WeekDayHeadersState();
+}
+
+class _WeekDayHeadersState extends State<_WeekDayHeaders> {
+  // Cached locale string — compared in didChangeDependencies to detect changes.
+  String? _cachedLocale;
+  // Cached localised day abbreviations (Monday → Sunday).
+  late List<String> _labels;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final locale = Localizations.localeOf(context).toString();
+    if (locale != _cachedLocale) {
+      _cachedLocale = locale;
+      // DateFormat.E gives localised abbreviations (Lun / Mon …) via intl.
+      // 2024-01-01 is a Monday — verified by the assert below.
+      assert(
+        DateTime(2024, 1, 1).weekday == DateTime.monday,
+        '2024-01-01 must be a Monday',
+      );
+      _labels = List.generate(7, (i) {
+        final day = DateTime(2024, 1, 1).add(Duration(days: i));
+        return DateFormat.E(locale).format(day);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final locale = Localizations.localeOf(context).toString();
-    // DateFormat.E donne les abréviations localisées (Lun/Mon etc.) via intl.
-    // On génère les 7 jours de la semaine en commençant par lundi (2024-01-01 = lundi).
-    final labels = List.generate(7, (i) {
-      final day = DateTime(2024, 1, 1).add(Duration(days: i));
-      return DateFormat.E(locale).format(day);
-    });
-
     return Container(
       color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.08),
       child: Row(
-        children: labels
+        children: _labels
             .map(
               (d) => Expanded(
                 child: Padding(

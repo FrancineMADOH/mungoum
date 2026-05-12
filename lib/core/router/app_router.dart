@@ -16,7 +16,7 @@ final GoRouter appRouter = GoRouter(
   initialLocation: '/splash',
   errorBuilder: (context, state) => Scaffold(
     body: Center(
-      child: Text(AppLocalizations.of(context)!.pageNotFound),
+      child: Text(AppLocalizations.of(context)?.pageNotFound ?? 'Page not found'),
     ),
   ),
   routes: [

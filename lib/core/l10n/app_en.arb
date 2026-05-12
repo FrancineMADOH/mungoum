@@ -21,5 +21,6 @@
   "seeCalendar": "See calendar",
   "developedBy": "Developed by Brightwill LLC",
   "appSubtitle": "Nguemba Calendar",
-  "pageNotFound": "Page not found"
+  "pageNotFound": "Page not found",
+  "errorOpeningLink": "Unable to open the link"
 }

@@ -16,7 +16,12 @@ class AppScaffold extends StatelessWidget {
     this.bottomWidget,
   });
 
-  static const _routes = ['/', '/calendar', '/eight-days', '/about'];
+  static const _routes = {
+    0: '/',
+    1: '/calendar',
+    2: '/eight-days',
+    3: '/about',
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +41,9 @@ class AppScaffold extends StatelessWidget {
       bottomNavigationBar: NavigationBar(
         selectedIndex: currentIndex,
         onDestinationSelected: (index) {
-          if (index != currentIndex) {
-            context.go(_routes[index]);
+          final route = _routes[index];
+          if (route != null && index != currentIndex) {
+            context.go(route);
           }
         },
         destinations: [

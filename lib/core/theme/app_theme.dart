@@ -50,22 +50,7 @@ ThemeData buildLightTheme() {
       selectedItemColor: AppColors.amberGold,
       unselectedItemColor: AppColors.cream,
     ),
-    navigationBarTheme: NavigationBarThemeData(
-      backgroundColor: AppColors.indigoNight,
-      indicatorColor: AppColors.amberGold.withValues(alpha: 0.2),
-      iconTheme: WidgetStateProperty.resolveWith((states) {
-        if (states.contains(WidgetState.selected)) {
-          return const IconThemeData(color: AppColors.amberGold);
-        }
-        return const IconThemeData(color: AppColors.cream);
-      }),
-      labelTextStyle: WidgetStateProperty.resolveWith((states) {
-        if (states.contains(WidgetState.selected)) {
-          return const TextStyle(color: AppColors.amberGold, fontSize: 12);
-        }
-        return const TextStyle(color: AppColors.cream, fontSize: 12);
-      }),
-    ),
+    navigationBarTheme: _buildNavigationBarTheme(AppColors.indigoNight),
     cardTheme: const CardThemeData(
       color: AppColors.white,
       elevation: 1,
@@ -105,22 +90,7 @@ ThemeData buildDarkTheme() {
       selectedItemColor: AppColors.amberGold,
       unselectedItemColor: AppColors.cream,
     ),
-    navigationBarTheme: NavigationBarThemeData(
-      backgroundColor: AppColors.darkSurface,
-      indicatorColor: AppColors.amberGold.withValues(alpha: 0.2),
-      iconTheme: WidgetStateProperty.resolveWith((states) {
-        if (states.contains(WidgetState.selected)) {
-          return const IconThemeData(color: AppColors.amberGold);
-        }
-        return const IconThemeData(color: AppColors.cream);
-      }),
-      labelTextStyle: WidgetStateProperty.resolveWith((states) {
-        if (states.contains(WidgetState.selected)) {
-          return const TextStyle(color: AppColors.amberGold, fontSize: 12);
-        }
-        return const TextStyle(color: AppColors.cream, fontSize: 12);
-      }),
-    ),
+    navigationBarTheme: _buildNavigationBarTheme(AppColors.darkSurface),
     cardTheme: const CardThemeData(
       color: AppColors.darkSurface,
       elevation: 1,
@@ -128,6 +98,25 @@ ThemeData buildDarkTheme() {
   );
 
   return base.copyWith(textTheme: _buildTextTheme(base.textTheme));
+}
+
+NavigationBarThemeData _buildNavigationBarTheme(Color backgroundColor) {
+  return NavigationBarThemeData(
+    backgroundColor: backgroundColor,
+    indicatorColor: AppColors.amberGold.withValues(alpha: 0.2),
+    iconTheme: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
+        return const IconThemeData(color: AppColors.amberGold);
+      }
+      return const IconThemeData(color: AppColors.cream);
+    }),
+    labelTextStyle: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
+        return const TextStyle(color: AppColors.amberGold, fontSize: 12);
+      }
+      return const TextStyle(color: AppColors.cream, fontSize: 12);
+    }),
+  );
 }
 
 // Playfair Display → titles and Nguemba day names (large display).
