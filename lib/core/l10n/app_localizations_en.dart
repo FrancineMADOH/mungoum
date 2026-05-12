@@ -65,4 +65,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get developedBy => 'Developed by Brightwill LLC';
+
+  @override
+  String get appSubtitle => 'Nguemba Calendar';
+
+  @override
+  String get pageNotFound => 'Page not found';
 }

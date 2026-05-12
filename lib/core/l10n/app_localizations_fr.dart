@@ -65,4 +65,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get developedBy => 'Développé par Brightwill LLC';
+
+  @override
+  String get appSubtitle => 'Calendrier Nguemba';
+
+  @override
+  String get pageNotFound => 'Page introuvable';
 }

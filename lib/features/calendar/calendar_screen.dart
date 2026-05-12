@@ -114,14 +114,15 @@ class _MonthHeader extends StatelessWidget {
 
 // Ligne des en-têtes de jours de la semaine (Lun → Dim).
 class _WeekDayHeaders extends StatelessWidget {
-  // Noms courts fixes — pas localisés dans les ARB, intl les fournit directement.
-  static const _days = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
-  static const _daysEn = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-
   @override
   Widget build(BuildContext context) {
-    final isFr = Localizations.localeOf(context).languageCode == 'fr';
-    final labels = isFr ? _days : _daysEn;
+    final locale = Localizations.localeOf(context).toString();
+    // DateFormat.E donne les abréviations localisées (Lun/Mon etc.) via intl.
+    // On génère les 7 jours de la semaine en commençant par lundi (2024-01-01 = lundi).
+    final labels = List.generate(7, (i) {
+      final day = DateTime(2024, 1, 1).add(Duration(days: i));
+      return DateFormat.E(locale).format(day);
+    });
 
     return Container(
       color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.08),

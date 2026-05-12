@@ -89,7 +89,7 @@ class _AppHeader extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          'Calendrier Nguemba',
+          l10n.appSubtitle,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 color: AppColors.amberGold,
               ),

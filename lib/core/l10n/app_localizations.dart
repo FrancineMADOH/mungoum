@@ -214,6 +214,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Developed by Brightwill LLC'**
   String get developedBy;
+
+  /// No description provided for @appSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Nguemba Calendar'**
+  String get appSubtitle;
+
+  /// No description provided for @pageNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Page not found'**
+  String get pageNotFound;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

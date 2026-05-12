@@ -19,5 +19,7 @@
   "appDescription": "Mungoum implements the traditional Nguemba calendar from Bamougoum village, West Region of Cameroon.",
   "calendarSource": "Source: Official Nguemba language calendar",
   "seeCalendar": "See calendar",
-  "developedBy": "Developed by Brightwill LLC"
+  "developedBy": "Developed by Brightwill LLC",
+  "appSubtitle": "Nguemba Calendar",
+  "pageNotFound": "Page not found"
 }

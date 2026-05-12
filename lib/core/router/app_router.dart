@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mungoum/core/l10n/app_localizations.dart';
 import 'package:mungoum/features/splash/splash_screen.dart';
 import 'package:mungoum/features/home/home_screen.dart';
 import 'package:mungoum/features/calendar/calendar_screen.dart';
@@ -14,7 +15,9 @@ final GoRouter appRouter = GoRouter(
   // Le splash est l'écran de démarrage — il navigue vers '/' après l'animation.
   initialLocation: '/splash',
   errorBuilder: (context, state) => Scaffold(
-    body: Center(child: Text('Page introuvable — ${state.uri}')),
+    body: Center(
+      child: Text(AppLocalizations.of(context)!.pageNotFound),
+    ),
   ),
   routes: [
     GoRoute(
