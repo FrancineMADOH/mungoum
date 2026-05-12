@@ -1,0 +1,21 @@
+{
+  "@@locale": "en",
+  "appName": "Mungoum",
+  "today": "Today",
+  "grandMarket": "Grand Market",
+  "petitMarket": "Petit Market",
+  "previousMonth": "Previous month",
+  "nextMonth": "Next month",
+  "eightDays": "The 8 days",
+  "about": "About",
+  "calendar": "Calendar",
+  "home": "Home",
+  "culturalMeaning": "Cultural meaning",
+  "comingSoon": "Content coming soon",
+  "supportProject": "Support the project",
+  "alsoKnownAs": "also known as",
+  "credits": "Credits",
+  "version": "Version",
+  "appDescription": "Mungoum implements the traditional Nguemba calendar from Bamougoum village, West Region of Cameroon.",
+  "calendarSource": "Source: Official Nguemba language calendar"
+}
