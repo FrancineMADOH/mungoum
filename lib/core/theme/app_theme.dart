@@ -32,10 +32,17 @@ ThemeData buildLightTheme() {
       onSurface: AppColors.anthracite,
     ),
     scaffoldBackgroundColor: AppColors.cream,
-    appBarTheme: const AppBarTheme(
+    appBarTheme: AppBarTheme(
       backgroundColor: AppColors.indigoNight,
       foregroundColor: AppColors.cream,
       elevation: 0,
+      // titleTextStyle requis en M3 : AppBar ignore foregroundColor pour le titre
+      // et utilise textTheme.titleLarge avec onSurface par défaut.
+      titleTextStyle: GoogleFonts.playfairDisplay(
+        fontSize: 22,
+        fontWeight: FontWeight.bold,
+        color: AppColors.cream,
+      ),
     ),
     // NavigationBar (M3) will replace this in F2 — kept here for fallback compatibility.
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -83,10 +90,15 @@ ThemeData buildDarkTheme() {
       onSurface: AppColors.cream,
     ),
     scaffoldBackgroundColor: AppColors.darkBackground,
-    appBarTheme: const AppBarTheme(
+    appBarTheme: AppBarTheme(
       backgroundColor: AppColors.darkSurface,
       foregroundColor: AppColors.cream,
       elevation: 0,
+      titleTextStyle: GoogleFonts.playfairDisplay(
+        fontSize: 22,
+        fontWeight: FontWeight.bold,
+        color: AppColors.cream,
+      ),
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: AppColors.darkSurface,

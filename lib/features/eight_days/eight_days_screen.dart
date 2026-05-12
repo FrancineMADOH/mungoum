@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mungoum/shared/widgets/app_scaffold.dart';
 
 class EightDaysScreen extends StatelessWidget {
   const EightDaysScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Les 8 jours')),
-      body: const Center(child: Text('Les 8 jours — F5')),
+    return const AppScaffold(
+      currentIndex: 2,
+      child: Center(child: Text('Les 8 jours — F5')),
     );
   }
 }

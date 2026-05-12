@@ -59,4 +59,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get calendarSource => 'Source : Calendrier officiel en langue nguemba';
+
+  @override
+  String get seeCalendar => 'Voir le calendrier';
 }

@@ -202,6 +202,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Source: Official Nguemba language calendar'**
   String get calendarSource;
+
+  /// No description provided for @seeCalendar.
+  ///
+  /// In en, this message translates to:
+  /// **'See calendar'**
+  String get seeCalendar;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
