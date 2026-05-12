@@ -18,5 +18,6 @@
   "version": "Version",
   "appDescription": "Mungoum est une application qui implémente le calendrier traditionnel nguemba du village de Bamougoum, Région de l'Ouest Cameroun.",
   "calendarSource": "Source : Calendrier officiel en langue nguemba",
-  "seeCalendar": "Voir le calendrier"
+  "seeCalendar": "Voir le calendrier",
+  "developedBy": "Développé par Bright Will LLC"
 }

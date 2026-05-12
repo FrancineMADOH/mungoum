@@ -62,4 +62,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get seeCalendar => 'See calendar';
+
+  @override
+  String get developedBy => 'Developed by Bright Will LLC';
 }

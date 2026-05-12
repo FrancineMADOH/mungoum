@@ -208,6 +208,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'See calendar'**
   String get seeCalendar;
+
+  /// No description provided for @developedBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Developed by Bright Will LLC'**
+  String get developedBy;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
