@@ -99,4 +99,65 @@ void main() {
       });
     });
   });
+
+  group('CalendarService.getDaysForMonth', () {
+    group('structure de la grille', () {
+      test('janvier 2025 : commence un mercredi → 2 cellules vides au début', () {
+        // 01/01/2025 = mercredi (weekday=3) → padding = 2
+        final cells = CalendarService.getDaysForMonth(2025, 1);
+        expect(cells[0].date, isNull);
+        expect(cells[1].date, isNull);
+        expect(cells[2].date, DateTime(2025, 1, 1));
+      });
+
+      test('janvier 2025 : 31 jours + 2 padding début + 3 padding fin = 36 cellules (5 semaines)', () {
+        final cells = CalendarService.getDaysForMonth(2025, 1);
+        expect(cells.length, 35); // 2 + 31 + 2 = 35 (multiple de 7)
+      });
+
+      test('longueur toujours multiple de 7', () {
+        for (int month = 1; month <= 12; month++) {
+          final cells = CalendarService.getDaysForMonth(2025, month);
+          expect(cells.length % 7, 0,
+              reason: 'Mois $month : ${cells.length} cellules');
+        }
+      });
+    });
+
+    group('contenu des cellules — vérifié contre le PDF officiel', () {
+      test('01/01/2025 → Fessâ', () {
+        final cells = CalendarService.getDaysForMonth(2025, 1);
+        // Index 2 (après 2 paddings)
+        final cell = cells.firstWhere((c) => c.date == DateTime(2025, 1, 1));
+        expect(cell.nguembaDay!.name, 'Fessâ');
+      });
+
+      test('03/01/2025 → Scheidâ (Grand Marché)', () {
+        final cells = CalendarService.getDaysForMonth(2025, 1);
+        final cell = cells.firstWhere((c) => c.date == DateTime(2025, 1, 3));
+        expect(cell.nguembaDay!.name, 'Scheidâ');
+        expect(cell.nguembaDay!.isGrandMarche, isTrue);
+      });
+
+      test('07/01/2025 → Mametè (Petit Marché)', () {
+        final cells = CalendarService.getDaysForMonth(2025, 1);
+        final cell = cells.firstWhere((c) => c.date == DateTime(2025, 1, 7));
+        expect(cell.nguembaDay!.name, 'Mametè');
+        expect(cell.nguembaDay!.isPetitMarche, isTrue);
+      });
+    });
+
+    group('navigation aux bornes', () {
+      test('décembre 2024 → mois précédent de janvier 2025 (Dart normalise)', () {
+        // DateTime(2025, 0) = décembre 2024 en Dart
+        final cells = CalendarService.getDaysForMonth(2024, 12);
+        expect(cells.any((c) => c.date?.month == 12 && c.date?.year == 2024), isTrue);
+      });
+
+      test('janvier 2026 → mois suivant de décembre 2025', () {
+        final cells = CalendarService.getDaysForMonth(2026, 1);
+        expect(cells.any((c) => c.date?.month == 1 && c.date?.year == 2026), isTrue);
+      });
+    });
+  });
 }

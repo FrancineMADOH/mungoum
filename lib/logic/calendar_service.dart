@@ -1,6 +1,10 @@
 import 'package:mungoum/data/datasources/nguemba_data.dart';
 import 'package:mungoum/data/models/nguemba_day.dart';
 
+// Représente une case de la grille calendrier.
+// date = null pour les cases vides de padding (début/fin de semaine).
+typedef CalendarCell = ({DateTime? date, NguembaDay? nguembaDay});
+
 abstract final class CalendarService {
   // Ancrage vérifié sur le PDF officiel : 2025-01-01 = Fessâ (index 0).
   // Changer cette valeur invaliderait tout le calendrier — ne pas modifier
@@ -23,5 +27,37 @@ abstract final class CalendarService {
     // Le +8 garantit un index toujours dans [0, 7] pour les dates avant 2025.
     final idx = ((delta % 8) + 8) % 8;
     return nguembaDays[idx];
+  }
+
+  /// Retourne la liste des cellules pour un mois complet.
+  ///
+  /// La liste est toujours un multiple de 7 (semaines complètes).
+  /// Les cellules vides de début/fin de mois ont date=null et nguembaDay=null.
+  /// La semaine commence le lundi (weekday=1).
+  static List<CalendarCell> getDaysForMonth(int year, int month) {
+    final firstDay = DateTime(year, month, 1);
+    // DateTime(year, month + 1, 0) = dernier jour du mois ; Dart normalise automatiquement.
+    final daysInMonth = DateTime(year, month + 1, 0).day;
+
+    // weekday : lundi=1 … dimanche=7. Padding = nombre de cases vides avant le 1er.
+    final startPadding = firstDay.weekday - 1;
+
+    final cells = <CalendarCell>[];
+
+    for (int i = 0; i < startPadding; i++) {
+      cells.add((date: null, nguembaDay: null));
+    }
+
+    for (int d = 1; d <= daysInMonth; d++) {
+      final date = DateTime(year, month, d);
+      cells.add((date: date, nguembaDay: getDayFor(date)));
+    }
+
+    // Complète la dernière semaine pour avoir un multiple de 7.
+    while (cells.length % 7 != 0) {
+      cells.add((date: null, nguembaDay: null));
+    }
+
+    return cells;
   }
 }
