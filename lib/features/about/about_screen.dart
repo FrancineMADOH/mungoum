@@ -5,8 +5,8 @@ import 'package:mungoum/core/l10n/app_localizations.dart';
 import 'package:mungoum/core/theme/app_theme.dart';
 import 'package:mungoum/shared/widgets/app_scaffold.dart';
 
-// URL donation — chaîne vide = bouton masqué jusqu'à ce que l'URL soit définie.
-const _donationUrl = '';
+// URL donation — chaîne vide = bouton masqué. Remplacer par l'URL réelle avant la release.
+const _donationUrl = 'https://www.paypal.com/donate';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});

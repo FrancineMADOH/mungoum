@@ -212,7 +212,7 @@ abstract class AppLocalizations {
   /// No description provided for @developedBy.
   ///
   /// In en, this message translates to:
-  /// **'Developed by Bright Will LLC'**
+  /// **'Developed by Brightwill LLC'**
   String get developedBy;
 }
 
