@@ -13,10 +13,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get today => 'Today';
 
   @override
-  String get grandMarket => 'Grand Market';
+  String get grandMarket => 'Big Market';
 
   @override
-  String get petitMarket => 'Petit Market';
+  String get petitMarket => 'Small Market';
 
   @override
   String get previousMonth => 'Previous month';
@@ -64,7 +64,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get seeCalendar => 'See calendar';
 
   @override
-  String get developedBy => 'Developed by Brightwill LLC';
+  String get developedBy => 'Developed by';
 
   @override
   String get appSubtitle => 'Nguemba Calendar';

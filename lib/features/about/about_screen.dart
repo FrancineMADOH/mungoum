@@ -6,7 +6,30 @@ import 'package:mungoum/core/theme/app_theme.dart';
 import 'package:mungoum/shared/widgets/app_scaffold.dart';
 
 // URL donation — chaîne vide = bouton masqué. Remplacer par l'URL réelle avant la release.
-const _donationUrl = 'https://www.paypal.com/donate';
+const _donationUrl = 'https://brightwill.org/contactus';
+
+// Nom de l'éditeur — nom propre, identique FR et EN, cliquable dans les crédits.
+const _publisherName = 'BrightWill Technologies';
+const _publisherUrl = 'https://brightwill.org';
+
+// Ouvre [url] dans le navigateur ; affiche un message si aucune app ne peut l'ouvrir.
+Future<void> _openUrl(BuildContext context, String url) async {
+  final l10n = AppLocalizations.of(context)!;
+  var opened = false;
+  try {
+    opened = await launchUrl(
+      Uri.parse(url),
+      mode: LaunchMode.externalApplication,
+    );
+  } catch (_) {
+    opened = false;
+  }
+  if (!opened && context.mounted) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(l10n.errorOpeningLink)),
+    );
+  }
+}
 
 class AboutScreen extends StatefulWidget {
   const AboutScreen({super.key});
@@ -155,25 +178,10 @@ class _DonationButton extends StatelessWidget {
   final AppLocalizations l10n;
   const _DonationButton({required this.l10n});
 
-  Future<void> _launch(BuildContext context) async {
-    try {
-      final uri = Uri.parse(_donationUrl);
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(uri, mode: LaunchMode.externalApplication);
-      }
-    } catch (_) {
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.errorOpeningLink)),
-        );
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return OutlinedButton.icon(
-      onPressed: () => _launch(context),
+      onPressed: () => _openUrl(context, _donationUrl),
       icon: const Icon(Icons.favorite_outline),
       label: Text(l10n.supportProject),
       style: OutlinedButton.styleFrom(
@@ -192,10 +200,7 @@ class _CreditsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final secondary = Theme.of(context)
-        .textTheme
-        .bodySmall
-        ?.copyWith(
+    final secondary = Theme.of(context).textTheme.bodySmall?.copyWith(
           color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
           height: 1.6,
         );
@@ -210,7 +215,28 @@ class _CreditsSection extends StatelessWidget {
               ),
         ),
         const SizedBox(height: 12),
-        Text(l10n.developedBy, style: secondary),
+        Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            Text('${l10n.developedBy} ', style: secondary),
+            InkWell(
+              onTap: () => _openUrl(context, _publisherUrl),
+              borderRadius: BorderRadius.circular(4),
+              child: Semantics(
+                link: true,
+                child: Text(
+                  _publisherName,
+                  style: secondary?.copyWith(
+                    color: AppColors.amberGold,
+                    fontWeight: FontWeight.w600,
+                    decoration: TextDecoration.underline,
+                    decorationColor: AppColors.amberGold,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
         const SizedBox(height: 4),
         Text(l10n.calendarSource, style: secondary),
       ],

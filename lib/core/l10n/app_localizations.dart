@@ -110,13 +110,13 @@ abstract class AppLocalizations {
   /// No description provided for @grandMarket.
   ///
   /// In en, this message translates to:
-  /// **'Grand Market'**
+  /// **'Big Market'**
   String get grandMarket;
 
   /// No description provided for @petitMarket.
   ///
   /// In en, this message translates to:
-  /// **'Petit Market'**
+  /// **'Small Market'**
   String get petitMarket;
 
   /// No description provided for @previousMonth.
@@ -212,7 +212,7 @@ abstract class AppLocalizations {
   /// No description provided for @developedBy.
   ///
   /// In en, this message translates to:
-  /// **'Developed by Brightwill LLC'**
+  /// **'Developed by'**
   String get developedBy;
 
   /// No description provided for @appSubtitle.

@@ -45,23 +45,21 @@ class CalendarDayCell extends StatelessWidget {
               '${date.day}',
               style: textTheme.labelLarge?.copyWith(
                 fontWeight: isToday ? FontWeight.w800 : FontWeight.w500,
-                color: isToday
-                    ? AppColors.amberGold
-                    : colorScheme.onSurface,
+                color: isToday ? AppColors.amberGold : colorScheme.onSurface,
               ),
             ),
             const SizedBox(height: 2),
-            // Nom nguemba tronqué à 5 caractères
-            Text(
-              nguembaDay.name.length > 5
-                  ? '${nguembaDay.name.substring(0, 5)}.'
-                  : nguembaDay.name,
-              style: textTheme.bodySmall?.copyWith(
-                fontSize: 9,
-                color: colorScheme.onSurface.withValues(alpha: 0.75),
+            // Nom nguemba complet — réduit si la case est trop étroite.
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                nguembaDay.name,
+                style: textTheme.bodySmall?.copyWith(
+                  fontSize: 9,
+                  color: colorScheme.onSurface.withValues(alpha: 0.75),
+                ),
+                maxLines: 1,
               ),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
             ),
             const SizedBox(height: 2),
             // Indicateur marché : petit rond coloré
